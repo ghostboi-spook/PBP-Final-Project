@@ -1,0 +1,386 @@
+/* ===== SEARCH PAGE STYLES ===== */
+.search-container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 40px 20px;
+    width: 100%;
+    min-height: calc(100vh - 80px);
+}
+
+.search-title {
+    font-size: 38px;
+    margin-bottom: 25px;
+    font-weight: 700;
+    color: white;
+    text-align: center;
+}
+
+.content-wrapper {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+
+.w-full {
+    width: 100%;
+    max-width: 800px;
+}
+
+/* ===== TITLES HEADER ===== */
+.titles-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 1.5rem;
+    padding-bottom: 0.75rem;
+    border-bottom: 1px solid #374151;
+}
+
+.section-title {
+    font-size: 22px;
+    border-left: 4px solid #f5c518;
+    padding-left: 10px;
+    font-weight: 600;
+    margin: 0;
+    color: white;
+}
+
+/* ===== SEARCH RESULTS CONTAINER ===== */
+#search-results {
+    width: 100%;
+}
+
+/* Watchlist-style movie card */
+.search-movie-card {
+    background-color: #0f0f0f;
+    border: 1px solid #222;
+    border-radius: 0.5rem;
+    overflow: hidden;
+    transition: all 0.2s ease;
+    margin-bottom: 1rem;
+}
+
+.search-movie-card:hover {
+    border-color: #333;
+    transform: translateY(-2px);
+    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.3);
+}
+
+.search-movie-card .card-content {
+    padding: 1.5rem;
+}
+
+.search-movie-card .flex-container {
+    display: flex;
+    gap: 1rem;
+    align-items: flex-start;
+}
+
+.search-movie-card .poster-container {
+    position: relative;
+    flex: none;
+    width: 5rem;
+}
+
+.search-movie-card .poster-image {
+    width: 5rem;
+    height: 7rem;
+    object-fit: cover;
+    border-radius: 0.125rem;
+    cursor: pointer;
+}
+
+.search-movie-card .movie-info {
+    flex: 1;
+    min-width: 0;
+}
+
+.search-movie-card .movie-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 0.5rem;
+}
+
+.search-movie-card .movie-title {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: white;
+    margin: 0;
+    cursor: pointer;
+}
+
+.search-movie-card .movie-title:hover {
+    color: #f5c518;
+}
+
+.search-movie-card .movie-meta {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-top: 0.5rem;
+    font-size: 0.875rem;
+    color: #9ca3af;
+}
+
+.search-movie-card .movie-rating-section {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 0.5rem;
+}
+
+.search-movie-card .movie-rating {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.875rem;
+    color: #e5e7eb;
+}
+
+.search-movie-card .rating-star {
+    color: #fbbf24;
+}
+
+/* Rating actions under rating */
+.search-movie-card .rating-actions {
+    display: flex;
+    gap: 0.75rem;
+    margin-top: 0.25rem;
+}
+
+.search-movie-card .rate-action {
+    color: #f5c518;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    font-size: 0.875rem;
+    transition: color 0.2s;
+}
+
+.search-movie-card .rate-action:hover {
+    color: #f7d142;
+    text-decoration: underline;
+}
+
+.search-movie-card .watch-action {
+    color: #60a5fa;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    font-size: 0.875rem;
+    transition: color 0.2s;
+}
+
+.search-movie-card .watch-action:hover {
+    color: #93c5fd;
+    text-decoration: underline;
+}
+
+.search-movie-card .movie-description {
+    color: #d1d5db;
+    margin-top: 0.75rem;
+    line-height: 1.625;
+    font-size: 0.875rem;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+/* Movie details - Director and Stars */
+.search-movie-card .movie-details {
+    margin-top: 0.75rem;
+    font-size: 0.875rem;
+    color: #d1d5db;
+}
+
+.search-movie-card .movie-details strong {
+    color: #e5e7eb;
+}
+
+.search-movie-card .movie-details div {
+    margin-bottom: 0.25rem;
+}
+
+/* ===== PEOPLE RESULTS ===== */
+.people-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 1rem;
+    margin-top: 1rem;
+}
+
+.person-card {
+    background-color: #0f0f0f;
+    border: 1px solid #222;
+    border-radius: 0.5rem;
+    padding: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    transition: all 0.2s ease;
+}
+
+.person-card:hover {
+    border-color: #333;
+    transform: translateY(-2px);
+}
+
+.person-card .person-avatar {
+    width: 4rem;
+    height: 4rem;
+    object-fit: cover;
+    border-radius: 9999px;
+    border: 2px solid #151515;
+}
+
+.person-card .person-info {
+    flex: 1;
+    min-width: 0;
+}
+
+.person-card .person-name {
+    font-weight: 700;
+    color: #fff;
+    font-size: 1rem;
+    margin: 0 0 0.25rem 0;
+    cursor: pointer;
+}
+
+.person-card .person-name:hover {
+    color: #f5c518;
+}
+
+.person-card .person-role {
+    color: #9ca3af;
+    font-size: 0.75rem;
+    margin-bottom: 0.5rem;
+}
+
+.person-card .person-known {
+    font-size: 0.875rem;
+    color: #60a5fa;
+}
+
+.person-card .person-actions {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.person-card .follow-btn {
+    background: transparent;
+    border: 1px solid #60a5fa;
+    color: #60a5fa;
+    padding: 0.25rem 0.75rem;
+    border-radius: 0.25rem;
+    font-size: 0.75rem;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.person-card .follow-btn:hover {
+    background: rgba(96, 165, 250, 0.1);
+}
+
+/* ===== NO RESULTS ===== */
+.no-results {
+    text-align: center;
+    padding: 3rem 1rem;
+    color: #9ca3af;
+    background-color: #0f0f0f;
+    border: 1px solid #222;
+    border-radius: 0.5rem;
+}
+
+.no-results-icon {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+    opacity: 0.5;
+}
+
+.no-results-title {
+    font-size: 1.25rem;
+    color: #e5e7eb;
+    margin-bottom: 0.5rem;
+}
+
+.no-results-text {
+    font-size: 0.875rem;
+    max-width: 300px;
+    margin: 0 auto;
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 1024px) {
+    .search-container {
+        max-width: 800px;
+    }
+}
+
+@media (max-width: 768px) {
+    .search-container {
+        padding: 20px 16px;
+        max-width: 100%;
+    }
+    
+    .search-title {
+        font-size: 28px;
+        text-align: left;
+    }
+    
+    .search-movie-card .flex-container {
+        flex-direction: column;
+    }
+    
+    .search-movie-card .poster-container {
+        width: 100%;
+    }
+    
+    .search-movie-card .poster-image {
+        width: 100%;
+        height: 200px;
+    }
+    
+    .search-movie-card .movie-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.5rem;
+    }
+    
+    .search-movie-card .movie-rating-section {
+        align-items: flex-start;
+        margin-top: 0.5rem;
+    }
+    
+    .search-movie-card .movie-meta {
+        flex-wrap: wrap;
+    }
+    
+    .people-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .titles-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.5rem;
+    }
+}
+
+@media (max-width: 640px) {
+    .search-title {
+        font-size: 24px;
+    }
+    
+    .section-title {
+        font-size: 18px;
+    }
+    
+    .search-movie-card .rating-actions {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.5rem;
+    }
+}
