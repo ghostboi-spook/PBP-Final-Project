@@ -2,14 +2,13 @@
 
 namespace App\Models;
 
-// use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use App\Models\Actor;
 
 class User extends Authenticatable
 {
-    /** @use HasFactory<\Database\Factories\UserFactory> */
     use HasFactory, Notifiable;
 
     /**
@@ -21,6 +20,10 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'role',
+        'avatar_path',
+        'username',
+        'bio',
     ];
 
     /**
@@ -44,5 +47,31 @@ class User extends Authenticatable
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
         ];
+    }
+
+    /**
+     * Movies saved by the user in watchlist (many-to-many via watchlists table)
+     */
+    public function watchlist()
+    {
+        return $this->belongsToMany(Movie::class, 'watchlists')->withPivot('added_at', 'note')->withTimestamps();
+    }
+
+    public function reviews()
+    {
+        return $this->hasMany(Review::class);
+    }
+
+    public function isAdmin(): bool
+    {
+        return isset($this->role) && $this->role === 'admin';
+    }
+
+    public function followedActors()
+    {
+        return $this->belongsToMany(
+            \App\Models\Actor::class,
+            'actor_user'
+        )->withTimestamps();
     }
 }
