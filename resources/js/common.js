@@ -168,48 +168,31 @@ function renderFooter() {
 
     footer.innerHTML = `
         <div class="bg-[#0f0f0f] border-t border-neutral-800 mt-16">
-            <div class="max-w-7xl mx-auto px-6 py-12 grid grid-cols-1 md:grid-cols-4 gap-10">
 
-                <div>
-                    <div class="bg-green-500 text-black font-black px-3 py-1 rounded w-fit text-lg mb-4">
-                        IMIX
-                    </div>
-                    <p class="text-sm text-neutral-500">
-                        Platform katalog film & serial lokal. Temukan rekomendasi,
-                        simpan watchlist, dan ikuti update rilisan terbaru.
-                    </p>
-                </div>
+            <!-- MAIN FOOTER -->
+            <div class="max-w-7xl mx-auto px-6 py-14 flex flex-col items-center text-center gap-4">
 
-                <div>
-                    <h4 class="text-white font-semibold mb-4">Quick Links</h4>
-                    <ul class="space-y-2 text-sm text-neutral-400">
-                        <li><a href="/" class="hover:text-green-400">Home</a></li>
-                        <li><a href="#" class="hover:text-green-400">Browse</a></li>
-                        <li><a href="#" class="hover:text-green-400">Top 10</a></li>
-                        <li><a href="#" class="hover:text-green-400">New Releases</a></li>
-                    </ul>
-                </div>
+                <!-- LOGO -->
+                <button id="footerScrollTop"
+                    class="bg-green-500 text-black font-black px-4 py-1.5 rounded
+                           text-lg hover:brightness-110 transition">
+                    IMIX
+                </button>
 
-                <div>
-                    <h4 class="text-white font-semibold mb-4">Support</h4>
-                    <ul class="space-y-2 text-sm text-neutral-400">
-                        <li><a href="#" class="hover:text-green-400">Help Center</a></li>
-                        <li><a href="#" class="hover:text-green-400">Privacy Policy</a></li>
-                        <li><a href="#" class="hover:text-green-400">Terms of Service</a></li>
-                    </ul>
-                </div>
-
-                <div>
-                    <h4 class="text-white font-semibold mb-4">Contact</h4>
-                    <ul class="space-y-2 text-sm text-neutral-400">
-                        <li>Email: support@imix.com</li>
-                        <li>Phone: +62 123 4567 890</li>
-                    </ul>
-                </div>
+                <!-- DESCRIPTION -->
+                <p class="max-w-xl text-sm text-neutral-500 leading-relaxed">
+                    Platform katalog film & serial lokal. Temukan rekomendasi,
+                    simpan watchlist, dan ikuti update rilisan terbaru.
+                </p>
             </div>
 
-            <div class="border-t border-neutral-800 mt-8">
-                <div class="max-w-7xl mx-auto px-6 py-6 flex justify-between text-xs text-neutral-500">
+            <!-- BOTTOM BAR -->
+            <div class="border-t border-neutral-800">
+                <div
+                    class="max-w-7xl mx-auto px-6 py-6
+                           flex flex-col sm:flex-row justify-between items-center
+                           gap-2 text-xs text-neutral-500">
+
                     <p>© ${new Date().getFullYear()} IMIX</p>
                     <p>Made with ♥ for Indonesian Cinema</p>
                 </div>
@@ -217,19 +200,14 @@ function renderFooter() {
         </div>
     `;
 
-    document.addEventListener("click", (e) => {
-        const btn = document.getElementById("searchFilterButton");
-        const options = document.getElementById("filterOptions");
-
-        if (!btn || !options) return;
-
-        if (btn.contains(e.target)) {
-            options.classList.toggle("hidden");
-            return;
-        }
-
-        if (!options.contains(e.target)) {
-            options.classList.add("hidden");
-        }
-    });
+    // SCROLL TO TOP WHEN FOOTER LOGO CLICKED
+    const scrollBtn = document.getElementById("footerScrollTop");
+    if (scrollBtn) {
+        scrollBtn.addEventListener("click", () => {
+            window.scrollTo({
+                top: 0,
+                behavior: "smooth",
+            });
+        });
+    }
 }
