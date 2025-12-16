@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Masuk / Daftar - IMIX</title>
+    <title>IMIX - Masuk / Daftar</title>
     <link rel="stylesheet" href="styles/global.css">
     <link rel="stylesheet" href="styles/components.css">
     <link rel="stylesheet" href="styles/layout.css">

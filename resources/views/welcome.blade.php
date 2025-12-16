@@ -11,7 +11,7 @@
     <title>IMIX - Movie Platform</title>
 
     <script src="https://cdn.tailwindcss.com"></script>
-
+    @vite(['resources\css\global.css', 'resources/css/components.css', 'resources/css/layout.css', 'resources/css/carousel.css', 'resources/js/common.js', 'resources/js/carousel.js'])
     <script>
         window.AUTH_USER = @json(auth()->user());
         window.IMIX_DATA = {
@@ -23,7 +23,6 @@
     </script>
 
 
-    @vite(['resources/css/global.css', 'resources/css/components.css', 'resources/css/layout.css', 'resources/css/carousel.css', 'resources/js/common.js', 'resources/js/carousel.js'])
 </head>
 
 <body class="bg-black text-white">

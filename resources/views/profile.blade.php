@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Profile - IMIX</title>
+    <title>IMIX - Profile</title>
 
     <script>
         window.AUTH_USER = @json(auth()->user());

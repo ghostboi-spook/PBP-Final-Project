@@ -48,4 +48,10 @@ class Movie extends Model
     {
         return $this->hasMany(Review::class);
     }
+    public function watchlists()
+    {
+        return $this->belongsToMany(Watchlist::class, 'movie_watchlist')
+                    ->withPivot('added_at')
+                    ->withTimestamps();
+    }
 }

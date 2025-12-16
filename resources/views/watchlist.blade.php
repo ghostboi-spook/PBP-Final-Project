@@ -17,6 +17,15 @@
 <body class="bg-[#070707] text-neutral-200">
     <!-- Header -->
     <header id="main-header"></header>
+    @if (Auth::check())
+        <div class="p-3 bg-green-800 text-sm text-white rounded mb-4">
+            Logged in as: {{ Auth::user()->name }} (ID: {{ Auth::id() }})
+        </div>
+    @else
+        <div class="p-3 bg-red-800 text-sm text-white rounded mb-4">
+            You are NOT logged in!
+        </div>
+    @endif
 
     <main class="max-w-6xl mx-auto px-4 sm:px-6 py-8">
         <!-- Watchlist Header -->
@@ -81,7 +90,22 @@
                     <div class="bg-[#0f0f0f] border border-neutral-800 rounded-lg p-4">
                         <h4 class="text-lg font-semibold text-white mb-4">Your lists</h4>
                         <div id="user-lists" class="space-y-3">
-                            <!-- Lists will be loaded here -->
+                            @forelse($watchlists as $list)
+                                <div class="flex justify-between items-center bg-[#121212] p-2 rounded hover:bg-[#1a1a1a] transition">
+                                    <a href="{{ route('watchlist.show', $list->id) }}" 
+                                    class="{{ isset($activeWatchlist) && $activeWatchlist->id == $list->id ? 'text-blue-400 font-semibold' : 'text-neutral-300 hover:text-white' }}">
+                                        {{ $list->name }}
+                                    </a>
+
+                                    <form action="{{ route('watchlist.destroy', $list->id) }}" method="POST" onsubmit="return confirm('Delete this list?')">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button class="text-red-500 hover:text-red-600 text-sm">✕</button>
+                                    </form>
+                                </div>
+                            @empty
+                                <p class="text-neutral-400 text-sm">You haven’t created any lists yet.</p>
+                            @endforelse
                         </div>
                     </div>
                 </div>
@@ -91,12 +115,15 @@
         <!-- Create List Modal -->
         <div id="create-list-modal" class="modal-overlay hidden">
             <div class="modal-content">
-                <h3 class="text-lg font-semibold mb-4">Create new list</h3>
-                <input type="text" id="newListName" class="modal-input mb-4" placeholder="List name">
-                <div class="flex justify-end gap-2">
-                    <button id="cancelCreate" class="modal-btn-cancel">Cancel</button>
-                    <button id="confirmCreate" class="modal-btn-confirm">Create</button>
-                </div>
+                <form action="{{ route('watchlist.store') }}" method="POST">
+                    @csrf
+                    <h3 class="text-lg font-semibold mb-4">Create new list</h3>
+                    <input type="text" name="name" id="newListName" class="modal-input mb-4" placeholder="List name" required>
+                    <div class="flex justify-end gap-2">
+                        <button type="button" id="cancelCreate" class="modal-btn-cancel">Cancel</button>
+                        <button type="submit" class="modal-btn-confirm">Create</button>
+                    </div>
+                </form>
             </div>
         </div>
 
