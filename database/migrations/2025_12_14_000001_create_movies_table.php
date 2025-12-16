@@ -20,7 +20,7 @@ return new class extends Migration
 
             $table->json('genres')->nullable();
 
-            $table->decimal('rating_avg', 3, 2)->default(0);
+            $table->decimal('rating_avg', 4, 1)->default(0);
             $table->integer('vote_count')->default(0);
 
             $table->string('poster_path')->nullable();

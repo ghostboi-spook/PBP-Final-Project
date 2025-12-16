@@ -47,17 +47,31 @@
                     : asset('images/visual.jpg') }}"
                     class="w-full h-full object-cover" alt="visual">
 
-                <button id="playBtn"
-                    class="absolute left-3 bottom-3 flex items-center gap-1.5 bg-black/40 px-2.5 py-1 rounded-full shadow-lg hover:bg-black/50 text-xs">
-                    <span
-                        class="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center border border-white/10">
-                        ▶
-                    </span>
-                    <span class="font-medium">
-                        Trailer
-                        <span class="text-xs text-neutral-300">—</span>
-                    </span>
-                </button>
+                @if ($movie->trailer_url)
+                    <a href="{{ $movie->trailer_url }}" target="_blank"
+                        class="absolute left-3 bottom-3 flex items-center gap-1.5 bg-black/40 px-2.5 py-1 rounded-full shadow-lg hover:bg-black/50 text-xs">
+                        <span
+                            class="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center border border-white/10">
+                            ▶
+                        </span>
+                        <span class="font-medium">
+                            Trailer
+                            <span class="text-xs text-neutral-300">—</span>
+                        </span>
+                    </a>
+                @else
+                    <div
+                        class="absolute left-3 bottom-3 flex items-center gap-1.5 bg-black/20 px-2.5 py-1 rounded-full text-xs text-neutral-400 cursor-not-allowed">
+                        <span
+                            class="w-8 h-8 rounded-full bg-white/5 flex items-center justify-center border border-white/10">
+                            ▶
+                        </span>
+                        <span class="font-medium">
+                            Trailer
+                            <span class="text-xs text-neutral-500">—</span>
+                        </span>
+                    </div>
+                @endif
             </div>
 
             <!-- Side actions -->
@@ -230,13 +244,12 @@
                                 class="flex items-center gap-2 p-2 bg-neutral-900 rounded hover:bg-neutral-800 transition">
 
                                 <div class="w-8 h-8 rounded-full bg-neutral-700 overflow-hidden">
-                                    <img
-                                        src="{{ $movie->poster_path
-                                            ? (Str::startsWith($movie->poster_path, ['http://', 'https://'])
-                                                ? $movie->poster_path
-                                                : asset('storage/' . $movie->poster_path))
-                                            : asset('images/poster.jpg') }}"
-                                    class="w-full h-full object-cover">
+                                    <img src="{{ $actor->photo_path
+                                        ? (Str::startsWith($actor->photo_path, ['http://', 'https://'])
+                                            ? $actor->photo_path
+                                            : asset('storage/' . $actor->photo_path))
+                                        : asset('images/poster.jpg') }}"
+                                        class="w-full h-full object-cover">
                                 </div>
 
                                 <div>
