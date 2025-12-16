@@ -62,7 +62,16 @@
 
             <!-- Side actions -->
             <div class="flex flex-col gap-2">
-                <!--  -->
+                <form action="{{ route('watchlist.toggle', $movie) }}" method="POST">
+                    @csrf
+                    <button class="bg-[var(--imdb-yellow)] text-neutral-900 font-bold px-3 py-2 rounded-lg shadow hover:brightness-110 transition text-xs">
+                        @if(auth()->check() && auth()->user()->Watchlists()->where('movie_id', $movie->id)->exists())
+                            ✓ In Watchlist
+                        @else
+                            + Add to Watchlist
+                        @endif
+                    </button>
+                </form>
             </div>
         </div>
 

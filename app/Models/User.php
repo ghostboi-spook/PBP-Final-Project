@@ -6,16 +6,14 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use App\Models\Actor;
+use App\Models\Watchlist;
+use App\Models\Review;
+use App\Models\Movie;
 
 class User extends Authenticatable
 {
     use HasFactory, Notifiable;
 
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var list<string>
-     */
     protected $fillable = [
         'name',
         'email',
@@ -26,21 +24,11 @@ class User extends Authenticatable
         'bio',
     ];
 
-    /**
-     * The attributes that should be hidden for serialization.
-     *
-     * @var list<string>
-     */
     protected $hidden = [
         'password',
         'remember_token',
     ];
 
-    /**
-     * Get the attributes that should be cast.
-     *
-     * @return array<string, string>
-     */
     protected function casts(): array
     {
         return [
@@ -50,13 +38,19 @@ class User extends Authenticatable
     }
 
     /**
-     * Movies saved by the user in watchlist (many-to-many via watchlists table)
+     * User → Watchlists (satu user punya banyak watchlist)
      */
     public function watchlists()
     {
-        return $this->hasMany(Watchlist::class);
+        return $this->belongsToMany(Movie::class, 'watchlists')
+                    ->withPivot('added_at')
+                    ->withTimestamps();
     }
 
+
+    /**
+     * Movies reviewed by the user
+     */
     public function reviews()
     {
         return $this->hasMany(Review::class);
@@ -67,10 +61,13 @@ class User extends Authenticatable
         return isset($this->role) && $this->role === 'admin';
     }
 
+    /**
+     * Actors followed by the user
+     */
     public function followedActors()
     {
         return $this->belongsToMany(
-            \App\Models\Actor::class,
+            Actor::class,
             'actor_user'
         )->withTimestamps();
     }

@@ -5,7 +5,6 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProfileController;
-
 use App\Http\Controllers\MovieController;
 use App\Http\Controllers\ActorController;
 use App\Http\Controllers\ReviewController;
@@ -32,63 +31,49 @@ Route::get('/konten/{movie}', [MovieController::class, 'show'])
 Route::get('/actor/{actor}', [ActorController::class, 'show'])
     ->name('actor.show');
 
-// search results
+// Search results
 Route::get('/search', [MovieController::class, 'search'])
     ->name('search');
 
-// Watchlist routes
-Route::middleware('auth')->group(function () {
+/*
+|--------------------------------------------------------------------------
+| Watchlist Routes (Protected)
+|--------------------------------------------------------------------------
+*/
+Route::middleware(['auth'])->group(function () {
     Route::get('/watchlist', [WatchlistController::class, 'index'])->name('watchlist.index');
     Route::post('/watchlist', [WatchlistController::class, 'store'])->name('watchlist.store');
-    Route::delete('/watchlist/{watchlist}', [WatchlistController::class, 'destroy'])->name('watchlist.destroy');
+    Route::post('/watchlist/toggle/{movie}', [WatchlistController::class, 'toggle'])->name('watchlist.toggle');
     Route::get('/watchlist/{watchlist}', [WatchlistController::class, 'show'])->name('watchlist.show');
-});
-
+    Route::delete('/watchlist/{watchlist}', [WatchlistController::class, 'destroy'])->name('watchlist.destroy');
+}); // ✅ blok ini harus ditutup!
 
 /*
 |--------------------------------------------------------------------------
 | Authentication Routes
 |--------------------------------------------------------------------------
 */
-
-Route::get('/login', [AuthController::class, 'showLogin'])
-    ->name('login');
-
+Route::get('/login', [AuthController::class, 'showLogin'])->name('login');
 Route::post('/login', [AuthController::class, 'login']);
-
-Route::get('/register', [AuthController::class, 'showRegister'])
-    ->name('register');
-
+Route::get('/register', [AuthController::class, 'showRegister'])->name('register');
 Route::post('/register', [AuthController::class, 'register']);
-
-Route::post('/logout', [AuthController::class, 'logout'])
-    ->name('logout');
+Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
 /*
 |--------------------------------------------------------------------------
 | Authenticated User Routes
 |--------------------------------------------------------------------------
 */
-
 Route::middleware('auth')->group(function () {
 
-    Route::get('/home', [HomeController::class, 'home'])
-        ->name('dashboard');
+    Route::get('/home', [HomeController::class, 'home'])->name('dashboard');
+    Route::get('/profile', [ProfileController::class, 'show'])->name('profile.show');
+    Route::post('/profile', [ProfileController::class, 'update'])->name('profile.update');
 
-    Route::get('/profile', [ProfileController::class, 'show'])
-        ->name('profile.show');
+    Route::post('/movies/{movie}/reviews', [ReviewController::class, 'store'])->name('reviews.store');
+    Route::put('/movies/{movie}/reviews/{review}', [ReviewController::class, 'update'])->name('reviews.update');
 
-    Route::post('/profile', [ProfileController::class, 'update'])
-        ->name('profile.update');
-
-    Route::post('/movies/{movie}/reviews', [ReviewController::class, 'store'])
-        ->name('reviews.store');
-
-    Route::put('/movies/{movie}/reviews/{review}', [ReviewController::class, 'update'])
-        ->name('reviews.update');
-
-    Route::post('/actor/{actor}/follow', [ActorFollowController::class, 'toggle'])
-        ->name('actor.follow');
+    Route::post('/actor/{actor}/follow', [ActorFollowController::class, 'toggle'])->name('actor.follow');
 });
 
 /*
@@ -96,12 +81,10 @@ Route::middleware('auth')->group(function () {
 | Admin Routes
 |--------------------------------------------------------------------------
 */
-
 Route::middleware('auth')
     ->prefix('admin')
     ->name('admin.')
     ->group(function () {
-
         Route::get('/movies', [AdminMovieController::class, 'index'])->name('movies.index');
         Route::get('/movies/create', [AdminMovieController::class, 'create'])->name('movies.create');
         Route::post('/movies', [AdminMovieController::class, 'store'])->name('movies.store');
