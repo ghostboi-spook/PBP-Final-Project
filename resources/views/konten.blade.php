@@ -8,7 +8,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>{{ $movie->title }} — Movie Content</title>
+    <title>IMIX — {{ $movie->title }}</title>
 
     <script src="https://cdn.tailwindcss.com"></script>
     @vite(['resources/css/global.css', 'resources/css/components.css', 'resources/css/layout.css', 'resources/css/konten.css', 'resources/js/common.js', 'resources/js/konten.js'])
@@ -57,9 +57,10 @@
                 @endif
             </div>
 
-            <!-- ACTION -->
-            <div>
-                <button class="w-full bg-[var(--imdb-yellow)] text-black text-xs font-bold px-3 py-2 rounded-lg">
+            <!-- Side actions -->
+            <div class="flex flex-col gap-2">
+                <button
+                    class="bg-[var(--imdb-yellow)] text-neutral-900 font-bold px-3 py-2 rounded-lg shadow hover:brightness-110 transition text-xs">
                     + Add to Watchlist
                 </button>
             </div>

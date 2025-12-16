@@ -52,9 +52,9 @@ class User extends Authenticatable
     /**
      * Movies saved by the user in watchlist (many-to-many via watchlists table)
      */
-    public function watchlist()
+    public function watchlists()
     {
-        return $this->belongsToMany(Movie::class, 'watchlists')->withPivot('added_at', 'note')->withTimestamps();
+        return $this->hasMany(Watchlist::class);
     }
 
     public function reviews()

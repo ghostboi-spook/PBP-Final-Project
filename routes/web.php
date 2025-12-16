@@ -10,6 +10,7 @@ use App\Http\Controllers\MovieController;
 use App\Http\Controllers\ActorController;
 use App\Http\Controllers\ReviewController;
 use App\Http\Controllers\ActorFollowController;
+use App\Http\Controllers\WatchlistController;
 
 use App\Http\Controllers\Admin\MovieController as AdminMovieController;
 use App\Http\Controllers\Admin\ActorController as AdminActorController;
@@ -31,8 +32,21 @@ Route::get('/konten/{movie}', [MovieController::class, 'show'])
 Route::get('/actor/{actor}', [ActorController::class, 'show'])
     ->name('actor.show');
 
+
 Route::get('/u/{username}', [ProfileController::class, 'showByUsername'])
     ->name('users.byUsername');
+
+// search results
+Route::get('/search', [MovieController::class, 'search'])
+    ->name('search');
+
+// Watchlist routes
+Route::middleware('auth')->group(function () {
+    Route::get('/watchlist', [WatchlistController::class, 'index'])->name('watchlist.index');
+    Route::post('/watchlist', [WatchlistController::class, 'store'])->name('watchlist.store');
+    Route::delete('/watchlist/{watchlist}', [WatchlistController::class, 'destroy'])->name('watchlist.destroy');
+    Route::get('/watchlist/{watchlist}', [WatchlistController::class, 'show'])->name('watchlist.show');
+});
 
 /*
 |--------------------------------------------------------------------------

@@ -47,39 +47,7 @@ function renderHeader() {
                   d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" />
         </svg>
 
-        <!-- FILTER DROPDOWN -->
-        <div class="absolute right-0 top-0 h-full flex items-center">
-            <button type="button"
-                id="searchFilterButton"
-                class="h-full px-3 bg-neutral-900 border border-l-0 border-neutral-800
-                       rounded-r-md text-neutral-400 hover:text-white
-                       hover:bg-neutral-800 transition text-sm flex items-center">
-                <span id="selectedFilterText">All</span>
-                <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 ml-1"
-                     viewBox="0 0 20 20" fill="currentColor">
-                    <path fill-rule="evenodd"
-                          d="M5.293 7.293a1 1 0 011.414 0L10 10.586
-                             l3.293-3.293a1 1 0 111.414 1.414
-                             l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
-                          clip-rule="evenodd" />
-                </svg>
-            </button>
-
-            <input type="hidden" id="searchType" name="type" value="all">
-
-            <!-- OPTIONS -->
-            <div id="filterOptions"
-                 class="absolute right-0 top-full mt-1 w-48
-                        bg-[#0f0f0f] border border-neutral-800
-                        rounded-md shadow-lg z-50 hidden">
-
-                <button type="button" class="filter-option" data-value="all">All</button>
-                <button type="button" class="filter-option" data-value="movie">Movies</button>
-                <button type="button" class="filter-option" data-value="series">Series</button>
-                <button type="button" class="filter-option" data-value="actor">Actors</button>
-                <button type="button" class="filter-option" data-value="director">Directors</button>
-            </div>
-        </div>
+        <div class="absolute right-0 top-0 h-full flex items-center"></div>
     </div>
 
     <!-- SUBMIT -->

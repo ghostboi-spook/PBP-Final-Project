@@ -8,7 +8,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{ $isOwner ? 'My Profile' : 'User Profile' }} - IMIX</title>
+    <title>Profile - IMIX</title>
 
     <script>
         window.AUTH_USER = @json(auth()->user());
