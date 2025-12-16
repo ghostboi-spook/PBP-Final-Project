@@ -27,7 +27,6 @@ class WatchlistController extends Controller
     {
         $user = auth()->user();
 
-        // Keamanan: hanya list milik user
         abort_if($watchlist->user_id !== $user->id, 403);
 
         $watchlists = $user->watchlists()->get();

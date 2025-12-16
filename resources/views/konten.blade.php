@@ -239,7 +239,7 @@
 
                 <div class="bg-neutral-800 p-3 rounded-lg text-xs">
                     <h3 class="font-semibold mb-2">Crew Utama</h3>
-                    <div>Direktor: {{ $movie->director ?? '—' }}</div>
+                    <div>Sutradara: {{ $movie->director ?? '—' }}</div>
                     <div>Penulis: {{ $movie->writer ?? '—' }}</div>
                     <div>Genres: {{ $movie->genres ? implode(', ', $movie->genres) : '—' }}</div>
                 </div>

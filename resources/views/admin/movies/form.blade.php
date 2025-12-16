@@ -127,7 +127,7 @@
         {{-- Crew --}}
         <div class="grid grid-cols-2 gap-3 mt-3">
             <div>
-                <label class="block text-sm text-neutral-400">Direktor</label>
+                <label class="block text-sm text-neutral-400">Sutradara</label>
                 <input type="text" name="director" value="{{ old('director', $movie->director) }}"
                     class="w-full px-3 py-2 bg-black/40 rounded border border-neutral-800">
             </div>
