@@ -55,6 +55,15 @@ class ReviewController extends Controller
         return back()->with('success', 'Review updated.');
     }
 
+    public function destroy(Movie $movie, Review $review)
+    {
+        abort_if($review->user_id !== Auth::id(), 403);
+        $review->delete();
+        $this->updateMovieRating($movie);
+        return back()->with('success', 'Review deleted.');
+    }
+
+
     protected function updateMovieRating(Movie $movie): void
     {
         $movie->update([

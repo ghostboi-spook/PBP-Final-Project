@@ -20,18 +20,19 @@ use App\Http\Controllers\Admin\ActorController as AdminActorController;
 |--------------------------------------------------------------------------
 */
 
-// Landing / welcome
+// Home
 Route::get('/', [HomeController::class, 'index'])->name('home');
 
-// Movie detail (konten.blade)
+// Movie detail
 Route::get('/konten/{movie}', [MovieController::class, 'show'])
     ->name('konten');
 
-// Actor detail (actor.blade)
+// Actor detail
 Route::get('/actor/{actor}', [ActorController::class, 'show'])
     ->name('actor.show');
 
-Route::get('/', [HomeController::class, 'index'])->name('home');
+Route::get('/u/{username}', [ProfileController::class, 'showByUsername'])
+    ->name('users.byUsername');
 
 /*
 |--------------------------------------------------------------------------
@@ -39,18 +40,13 @@ Route::get('/', [HomeController::class, 'index'])->name('home');
 |--------------------------------------------------------------------------
 */
 
-Route::get('/login', [AuthController::class, 'showLogin'])
-    ->name('login');
-
+Route::get('/login', [AuthController::class, 'showLogin'])->name('login');
 Route::post('/login', [AuthController::class, 'login']);
 
-Route::get('/register', [AuthController::class, 'showRegister'])
-    ->name('register');
-
+Route::get('/register', [AuthController::class, 'showRegister'])->name('register');
 Route::post('/register', [AuthController::class, 'register']);
 
-Route::post('/logout', [AuthController::class, 'logout'])
-    ->name('logout');
+Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
 /*
 |--------------------------------------------------------------------------
@@ -60,21 +56,27 @@ Route::post('/logout', [AuthController::class, 'logout'])
 
 Route::middleware('auth')->group(function () {
 
-    Route::get('/home', [HomeController::class, 'home'])
-        ->name('dashboard');
+    // Dashboard
+    Route::get('/home', [HomeController::class, 'home'])->name('dashboard');
 
+    // My Profile
     Route::get('/profile', [ProfileController::class, 'show'])
         ->name('profile.show');
 
     Route::post('/profile', [ProfileController::class, 'update'])
         ->name('profile.update');
 
+    // Reviews
     Route::post('/movies/{movie}/reviews', [ReviewController::class, 'store'])
         ->name('reviews.store');
 
     Route::put('/movies/{movie}/reviews/{review}', [ReviewController::class, 'update'])
         ->name('reviews.update');
 
+    Route::delete('/movies/{movie}/reviews/{review}', [ReviewController::class, 'destroy'])
+        ->name('reviews.destroy');
+
+    // Actor follow
     Route::post('/actor/{actor}/follow', [ActorFollowController::class, 'toggle'])
         ->name('actor.follow');
 });

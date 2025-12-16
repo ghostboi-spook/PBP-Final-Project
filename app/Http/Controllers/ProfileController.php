@@ -3,16 +3,39 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 
 class ProfileController extends Controller
 {
+    /**
+     * PROFILE SENDIRI
+     * URL: /profile
+     */
     public function show()
     {
-        $user = Auth::user()->load(['reviews.movie', 'followedActors']);
+        $user = Auth::user()->load([
+            'reviews.movie',
+            'followedActors'
+        ]);
 
-        return view('profile', compact('user'));
+        return view('profile', [
+            'user' => $user,
+            'isOwner' => true
+        ]);
+    }
+
+    public function showByUsername(string $username)
+    {
+        $user = User::where('username', $username)
+            ->with(['reviews.movie', 'followedActors'])
+            ->firstOrFail();
+
+        return view('profile', [
+            'user' => $user,
+            'isOwner' => auth()->check() && auth()->id() === $user->id
+        ]);
     }
 
     public function update(Request $request)
@@ -20,14 +43,14 @@ class ProfileController extends Controller
         $user = Auth::user();
 
         $data = $request->validate([
-            'name' => 'required|string|max:255',
-            'username' => 'nullable|string|max:50',
-            'avatar' => 'nullable|image|max:2048',
+            'name'     => 'required|string|max:255',
+            'username' => 'nullable|string|max:50|alpha_dash|unique:users,username,' . $user->id,
+            'avatar'   => 'nullable|image|max:2048',
         ]);
 
         if ($request->hasFile('avatar')) {
             if ($user->avatar_path) {
-                Storage::delete($user->avatar_path);
+                Storage::disk('public')->delete($user->avatar_path);
             }
 
             $data['avatar_path'] = $request->file('avatar')->store('avatars', 'public');
