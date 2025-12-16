@@ -1,47 +1,30 @@
 <?php
+
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Watchlist;
+use App\Models\Movie;
 
 class WatchlistController extends Controller
 {
     public function index()
     {
         $user = auth()->user();
-        $watchlists = $user->watchlists()->get();
+        $movies = $user->watchlists()->with('actors')->get();
 
-        $activeWatchlist = $watchlists->first();
-
-        return view('watchlist', compact('watchlists', 'activeWatchlist'));
+        return view('watchlist', compact('movies'));
     }
 
-    public function store(Request $request)
-    {
-        $request->validate(['name' => 'required|string|max:255']);
-        auth()->user()->watchlists()->create(['name' => $request->name]);
-        return redirect()->route('watchlist.index');
-    }
-
-    public function show(Watchlist $watchlist)
+    public function toggle(Movie $movie)
     {
         $user = auth()->user();
 
-        abort_if($watchlist->user_id !== $user->id, 403);
+        if ($user->watchlists()->where('movie_id', $movie->id)->exists()) {
+            $user->watchlists()->detach($movie->id);
+            return back()->with('success', 'Removed from Watchlist.');
+        }
 
-        $watchlists = $user->watchlists()->get();
-        $activeWatchlist = $watchlist;
-
-        return view('watchlist', compact('watchlists', 'activeWatchlist'));
-    }
-
-    public function destroy(Watchlist $watchlist)
-    {
-        $user = auth()->user();
-        abort_if($watchlist->user_id !== $user->id, 403);
-
-        $watchlist->delete();
-
-        return redirect()->route('watchlist.index');
+        $user->watchlists()->attach($movie->id, ['added_at' => now()]);
+        return back()->with('success', 'Added to Watchlist.');
     }
 }
