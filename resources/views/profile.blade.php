@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile - IMIX</title>
+
+    <script>
+        window.AUTH_USER = @json(auth()->user());
+    </script>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    @vite(['resources/css/global.css', 'resources/css/components.css', 'resources/css/layout.css'])
+</head>
+
+<body class="bg-black text-white">
+    <header id="main-header"></header>
+
+    <main class="max-w-5xl mx-auto px-6 py-10">
+        <a href="{{ route('home') }}"
+            class="inline-flex items-center gap-2 px-4 py-2 rounded-lg border border-neutral-800 text-sm text-neutral-300 hover:border-green-500 hover:text-green-400 hover:bg-neutral-900 transition">
+            ← Home
+        </a>
+
+        <h1 class="text-3xl font-bold mb-6">My Profile</h1>
+
+        @if (session('success'))
+            <div class="mb-4 p-3 bg-green-600 text-black rounded">
+                {{ session('success') }}
+            </div>
+        @endif
+
+        <div class="grid md:grid-cols-[240px_1fr] gap-8">
+            <!-- Sidebar -->
+            <div>
+                <div class="w-48 h-48 rounded-full overflow-hidden border border-neutral-800 mb-4">
+                    @if ($user->avatar_path)
+                        <img src="{{ Storage::url($user->avatar_path) }}" class="w-full h-full object-cover">
+                    @else
+                        <div class="w-full h-full flex items-center justify-center bg-neutral-800 text-4xl font-bold">
+                            {{ strtoupper(substr($user->name, 0, 1)) }}
+                        </div>
+                    @endif
+                </div>
+
+                <p class="text-xl font-semibold">{{ $user->name }}</p>
+                <p class="text-neutral-400 text-sm">{{ $user->email }}</p>
+                <form method="POST" action="{{ route('logout') }}" class="mt-4">
+                    @csrf
+                    <button type="submit"
+                        class="w-full flex items-center justify-center gap-2 px-4 py-2 rounded-lg border border-neutral-800 text-sm text-red-400 hover:bg-red-500/10 hover:border-red-500 hover:text-red-300 transition">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24"
+                            stroke="currentColor" stroke-width="2">
+                            <path stroke-linecap="round" stroke-linejoin="round"
+                                d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1m0-10V5m0 0a4 4 0 00-4 4v6a4 4 0 004 4" />
+                        </svg>
+                        Logout
+                    </button>
+                </form>
+
+            </div>
+
+            <!-- Content -->
+            <div class="space-y-8">
+                <!-- Edit Profile -->
+                <div class="bg-neutral-900 p-6 rounded-lg border border-neutral-800">
+                    <h2 class="text-xl font-semibold mb-4">Edit Profile</h2>
+
+                    <form method="POST" action="{{ route('profile.update') }}" enctype="multipart/form-data"
+                        class="space-y-4">
+                        @csrf
+
+                        <div>
+                            <label class="text-sm text-neutral-400">Name</label>
+                            <input type="text" name="name" value="{{ old('name', $user->name) }}"
+                                class="w-full px-3 py-2 bg-black border border-neutral-800 rounded">
+                        </div>
+
+                        <div>
+                            <label class="text-sm text-neutral-400">Username</label>
+                            <input type="text" name="username" value="{{ old('username', $user->username) }}"
+                                class="w-full px-3 py-2 bg-black border border-neutral-800 rounded">
+                        </div>
+
+                        <div>
+                            <label class="text-sm text-neutral-400">Avatar</label>
+                            <input type="file" name="avatar" class="block text-sm text-neutral-400">
+                        </div>
+
+                        <button class="px-4 py-2 bg-green-500 text-black rounded">
+                            Simpan
+                        </button>
+                    </form>
+                </div>
+
+                <div class="bg-neutral-900 p-6 rounded-lg border border-neutral-800">
+                    <h2 class="text-xl font-semibold mb-4">Aktor yang Anda Ikuti</h2>
+
+                    <div class="grid grid-cols-2 sm:grid-cols-3 gap-4">
+                        @forelse($user->followedActors as $actor)
+                            <a href="{{ route('actor.show', $actor) }}?from=profile"
+                                class="bg-neutral-800 p-3 rounded-lg hover:bg-neutral-700 transition">
+
+                                <div class="aspect-square rounded overflow-hidden mb-2">
+                                    <img src="{{ $actor->photo_path
+                                        ? (Str::startsWith($actor->photo_path, ['http', 'https'])
+                                            ? $actor->photo_path
+                                            : asset('storage/' . $actor->photo_path))
+                                        : asset('images/default-actor.png') }}"
+                                        class="w-full h-full object-cover">
+                                </div>
+
+                                <div class="text-sm font-semibold text-white truncate">
+                                    {{ $actor->name }}
+                                </div>
+                            </a>
+                        @empty
+                            <p class="text-neutral-400 text-sm">
+                                Kamu belum mengikuti aktor manapun.
+                            </p>
+                        @endforelse
+                    </div>
+                </div>
+
+                <!-- User Reviews -->
+                <div class="bg-neutral-900 p-6 rounded-lg border border-neutral-800">
+                    <h2 class="text-xl font-semibold mb-4">Review Saya</h2>
+
+                    @forelse($user->reviews as $review)
+                        <div class="border-b border-neutral-800 pb-3 mb-3">
+                            <div class="flex items-center justify-between">
+                                <a href="{{ route('konten', $review->movie) }}?back={{ route('profile.show') }}"
+                                    class="font-semibold hover:text-green-400 transition">
+                                    {{ $review->movie->title }}
+                                </a>
+                                <div class="text-yellow-400 text-sm">
+                                    ★ {{ $review->rating }}
+                                </div>
+                            </div>
+                            <p class="text-sm text-neutral-300 mt-1">
+                                {{ Str::limit($review->content, 120) }}
+                            </p>
+                        </div>
+                    @empty
+                        <p class="text-neutral-400">Anda Belum Menulis Review Apapun.</p>
+                    @endforelse
+                </div>
+
+                @if (auth()->user()->role === 'admin')
+                    <div class="mt-8 p-4 rounded-lg bg-neutral-900 border border-neutral-800">
+                        <h3 class="text-sm font-semibold text-neutral-400 mb-3 uppercase tracking-wide">
+                            Admin Panel
+                        </h3>
+                        <div class="flex flex-wrap gap-3">
+                            <a href="{{ route('admin.movies.index') }}"
+                                class="px-4 py-2 bg-green-500/90 hover:bg-green-500 text-black rounded text-sm font-semibold transition">
+                                🎬 Movie Index
+                            </a>
+                            <a href="{{ route('admin.actors.index') }}"
+                                class="px-4 py-2 bg-sky-500/90 hover:bg-sky-500 text-black rounded text-sm font-semibold transition">
+                                🎭 Actor Index
+                            </a>
+                        </div>
+                    </div>
+                @endif
+            </div>
+        </div>
+    </main>
+
+    <footer id="main-footer"></footer>
+
+</body>
+
+</html>
