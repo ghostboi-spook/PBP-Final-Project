@@ -5,19 +5,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>IMIX - Daftar</title>
-    <!-- CSS Files -->
-    <link rel="stylesheet" href="styles/global.css">
-    <link rel="stylesheet" href="styles/components.css">
-    <link rel="stylesheet" href="styles/layout.css">
-    <link rel="stylesheet" href="styles/login.css">
-    <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     @vite(['resources/css/global.css', 'resources/css/components.css', 'resources/css/layout.css', 'resources/css/login.css'])
 </head>
 
 <body class="login-background min-h-screen">
 
-    <!-- Register Content -->
     <main class="flex items-center justify-center min-h-screen px-4 py-8">
         <div class="login-container w-full max-w-md">
 
@@ -29,7 +22,6 @@
             </div>
 
             <div class="login-form-container">
-                <!-- Register Form -->
                 <div class="login-fade-in">
                     <h2 class="login-form-title">Buat Akun Baru</h2>
 

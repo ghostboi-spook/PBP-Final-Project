@@ -9,10 +9,6 @@ use Illuminate\Support\Facades\Storage;
 
 class ProfileController extends Controller
 {
-    /**
-     * PROFILE SENDIRI
-     * URL: /profile
-     */
     public function show()
     {
         $user = Auth::user()->load([
@@ -22,7 +18,19 @@ class ProfileController extends Controller
 
         return view('profile', [
             'user' => $user,
-            'isOwner' => true
+            'isOwner' => true,
+            'badges' => $user->getBadges()
+        ]);
+    }
+
+    public function showPublic(User $user)
+    {
+        $user->load(['reviews.movie', 'followedActors']);
+
+        return view('profile', [
+            'user' => $user,
+            'isOwner' => auth()->check() && auth()->id() === $user->id,
+            'badges' => $user->getBadges()
         ]);
     }
 
@@ -34,7 +42,8 @@ class ProfileController extends Controller
 
         return view('profile', [
             'user' => $user,
-            'isOwner' => auth()->check() && auth()->id() === $user->id
+            'isOwner' => auth()->check() && auth()->id() === $user->id,
+            'badges' => $user->getBadges()
         ]);
     }
 

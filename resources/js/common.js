@@ -3,10 +3,6 @@ document.addEventListener("DOMContentLoaded", () => {
     renderFooter();
 });
 
-/* =========================
-   HEADER
-========================= */
-
 function renderHeader() {
     const header = document.getElementById("main-header");
     if (!header) return;
@@ -15,53 +11,46 @@ function renderHeader() {
 
     header.innerHTML = `
         <div class="bg-black border-b border-neutral-800">
-            <div class="max-w-7xl mx-auto px-6 py-4 flex items-center gap-6">
-                
-                <!-- Logo -->
-                <a href="/" class="font-extrabold text-lg text-green-500">
-                    IMIX
-                </a>
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 py-3 sm:py-4">
+                <div class="flex items-center justify-between gap-4">
+                    <a href="/" class="font-extrabold text-lg text-green-500 flex-shrink-0">
+                        IMIX
+                    </a>
 
-                <!-- Search -->
-                <form id="searchForm" action="/search" method="GET"
-      class="flex-1 max-w-xl mx-auto relative flex items-center gap-2">
+                    <form id="searchForm" action="/search" method="GET"
+                        class="flex-1 max-w-xl flex items-center gap-2">
+                        <div class="relative w-full">
+                            <input
+                                name="q"
+                                id="searchInput"
+                                placeholder="Cari film atau aktor..."
+                                class="w-full rounded-md px-4 py-2 pl-10
+                                       bg-neutral-900 border border-neutral-800
+                                       focus:border-green-500 focus:ring-1 focus:ring-green-500
+                                       focus:outline-none text-sm transition text-white"
+                            />
+                            <svg xmlns="http://www.w3.org/2000/svg"
+                                 class="w-4 h-4 absolute left-3 top-1/2 -translate-y-1/2 text-neutral-500"
+                                 fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round"
+                                      stroke-width="2"
+                                      d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" />
+                            </svg>
+                        </div>
+                        <button type="submit"
+                            class="bg-green-500 text-black font-bold px-3 sm:px-4 py-2
+                                   rounded-md text-sm hover:bg-green-400 transition flex-shrink-0">
+                            <span class="hidden sm:inline">Search</span>
+                            <svg class="w-4 h-4 sm:hidden" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                      d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" />
+                            </svg>
+                        </button>
+                    </form>
 
-    <div class="relative w-full">
-        <!-- Search Input -->
-        <input
-            name="q"
-            id="searchInput"
-            placeholder="Search movie, series, actor, director..."
-            class="w-full rounded-md px-4 py-2 pl-10 pr-32
-                   bg-neutral-900 border border-neutral-800
-                   focus:border-green-500 focus:ring-1 focus:ring-green-500
-                   focus:outline-none text-sm transition text-white"
-        />
-
-        <!-- Search Icon -->
-        <svg xmlns="http://www.w3.org/2000/svg"
-             class="w-4 h-4 absolute left-3 top-3 text-neutral-500"
-             fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round"
-                  stroke-width="2"
-                  d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" />
-        </svg>
-
-        <div class="absolute right-0 top-0 h-full flex items-center"></div>
-    </div>
-
-    <!-- SUBMIT -->
-    <button type="submit"
-        class="bg-green-500 text-black font-bold px-4 py-2
-               rounded-md text-sm hover:bg-green-400 transition">
-        Search
-    </button>
-</form>
-
-
-                <!-- Right menu -->
-                <div class="flex items-center gap-6 ml-auto text-sm">
-                    ${user ? renderUserMenu() : renderAuthButtons()}
+                    <div class="flex items-center gap-3 sm:gap-6 text-sm flex-shrink-0">
+                        ${user ? renderUserMenu() : renderAuthButtons()}
+                    </div>
                 </div>
             </div>
         </div>
@@ -95,10 +84,6 @@ function renderHeader() {
     });
 }
 
-/* =========================
-   USER MENU (LOGIN)
-========================= */
-
 function renderUserMenu() {
     return `
         <a href="/watchlist" class="hover:text-green-400 transition">
@@ -109,10 +94,6 @@ function renderUserMenu() {
         </a>
     `;
 }
-
-/* =========================
-   AUTH BUTTONS (GUEST)
-========================= */
 
 function renderAuthButtons() {
     return `
@@ -125,10 +106,6 @@ function renderAuthButtons() {
         </a>
     `;
 }
-
-/* =========================
-   FOOTER
-========================= */
 
 function renderFooter() {
     const footer = document.getElementById("main-footer");
@@ -168,7 +145,6 @@ function renderFooter() {
         </div>
     `;
 
-    // SCROLL TO TOP WHEN FOOTER LOGO CLICKED
     const scrollBtn = document.getElementById("footerScrollTop");
     if (scrollBtn) {
         scrollBtn.addEventListener("click", () => {

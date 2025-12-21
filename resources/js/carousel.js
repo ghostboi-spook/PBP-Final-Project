@@ -1,13 +1,3 @@
-/**
- * =====================================================
- * IMIX CAROUSEL CONTROLLER (UI SAFE)
- * =====================================================
- * - Tidak generate HTML
- * - Tidak hapus overlay / title / button
- * - Hanya mengatur active slide
- * =====================================================
- */
-
 document.addEventListener("DOMContentLoaded", () => {
     initHeroCarousel();
 });
@@ -46,7 +36,6 @@ function initHeroCarousel() {
         showSlide((currentIndex - 1 + items.length) % items.length);
     }
 
-    // Buttons
     if (nextBtn) {
         nextBtn.addEventListener("click", () => {
             nextSlide();

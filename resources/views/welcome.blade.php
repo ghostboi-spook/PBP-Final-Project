@@ -29,13 +29,12 @@
 
     <header id="main-header"></header>
 
-    <main class="max-w-7xl mx-auto px-6 py-8">
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 py-6 sm:py-8">
 
-        <!-- HERO + SIDEBAR -->
-        <section id="hero-carousel" class="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-12">
+        <section id="hero-carousel" class="grid grid-cols-1 lg:grid-cols-3 gap-6 lg:gap-8 mb-8 sm:mb-12">
 
             <div id="carousel-wrapper"
-                class="lg:col-span-2 relative w-full h-[500px] rounded-lg overflow-hidden bg-neutral-900">
+                class="lg:col-span-2 relative w-full h-[300px] sm:h-[400px] lg:h-[500px] rounded-lg overflow-hidden bg-neutral-900">
 
                 @if ($carouselMovies->count())
                     @foreach ($carouselMovies as $index => $movie)
@@ -68,7 +67,6 @@
                 </div>
             </div>
 
-            <!-- FILM TERBARU -->
             <div class="lg:col-span-1">
                 <h2 class="text-green-400 text-xl font-bold mb-6">
                     Film Terbaru
@@ -99,7 +97,6 @@
             </div>
         </section>
 
-        <!-- MOST POPULAR CELEBRITY -->
         <section id="celebrities-carousel" class="mb-12">
             <h2 class="text-2xl font-bold mb-6">Aktor Paling Populer</h2>
 
@@ -130,7 +127,6 @@
             @endif
         </section>
 
-        <!-- TOP 10 MOVIES -->
         <section id="top-movies" class="mt-10">
             <h2 class="text-2xl font-bold text-white mb-6">
                 Top 10 Film

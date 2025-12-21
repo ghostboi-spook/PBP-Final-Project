@@ -47,7 +47,6 @@ class ActorController extends Controller
             'known_for' => 'nullable|string',
         ]);
 
-        // known_for → array
         if (!empty($data['known_for'])) {
             $data['known_for'] = array_values(
                 array_filter(array_map('trim', explode(',', $data['known_for'])))

@@ -21,17 +21,14 @@
 
 <body class="bg-[#070707] text-slate-100 min-h-screen">
 
-    <!-- HEADER (PAKAI COMMON.JS) -->
     <header id="main-header"></header>
 
-    <!-- CONTENT -->
-    <div class="search-container p-6 max-w-5xl mx-auto">
+    <div class="search-container px-4 sm:p-6 max-w-5xl mx-auto py-6">
 
         <h1 class="text-xl font-semibold mb-6">
             Search "{{ $q }}"
         </h1>
 
-        <!-- ================= MOVIES ================= -->
         <div class="mb-12">
             <div class="flex items-center justify-between mb-4">
                 <h2 class="text-lg font-semibold">Film</h2>
@@ -45,7 +42,6 @@
                     <a href="{{ route('konten', $movie) }}"
                         class="block p-4 bg-neutral-900 rounded flex gap-4 hover:bg-neutral-800 transition">
 
-                        <!-- POSTER -->
                         <div class="w-20 shrink-0">
                             <img src="{{ $movie->poster_path
                                 ? (Str::startsWith($movie->poster_path, ['http', 'https'])
@@ -55,7 +51,6 @@
                                 alt="{{ $movie->title }}" class="w-full rounded">
                         </div>
 
-                        <!-- INFO -->
                         <div>
                             <h3 class="font-semibold text-base">
                                 {{ $movie->title }}
@@ -81,7 +76,6 @@
             </div>
         </div>
 
-        <!-- ================= PEOPLE ================= -->
         <div>
             <h2 class="text-lg font-semibold mb-4">
                 Aktor
@@ -115,7 +109,6 @@
 
     </div>
 
-    <!-- FOOTER -->
     <footer id="main-footer"></footer>
 
 </body>

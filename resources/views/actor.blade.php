@@ -9,12 +9,10 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>IMIX - {{ $actor->name ?? 'Actor' }}</title>
-    <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     @vite(['resources/css/global.css', 'resources/css/components.css', 'resources/css/layout.css', 'resources/js/common.js'])
 
     <style>
-        /* Custom styles for actor page */
         body {
             font-family: 'Instrument Sans', sans-serif;
         }
@@ -28,27 +26,24 @@
 
 <body class="bg-black text-white antialiased flex flex-col min-h-screen">
     <main class="flex-grow">
-        <div class="max-w-7xl mx-auto px-6 pt-6">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 pt-6">
             <a href="{{ request('back', route('home')) }}"
                 class="inline-flex items-center gap-2 px-4 py-2 rounded-lg border border-neutral-800 text-sm text-neutral-300 hover:border-green-500 hover:text-green-400 hover:bg-neutral-900 transition">
                 ← Kembali
             </a>
 
         </div>
-        <div class="max-w-7xl mx-auto px-6 py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 py-8 sm:py-12">
             <div class="flex flex-col md:flex-row gap-12">
 
-                <!-- Sidebar / Photo -->
                 <div class="w-full md:w-80 flex-none">
                     <div class="rounded-xl overflow-hidden shadow-2xl border-2 border-neutral-800 mb-6">
-                        <!-- Actor photo (storage path fallback) -->
-                        <img
-                            src="{{ $actor->photo_path
-                                ? (Str::startsWith($actor->photo_path, ['http://', 'https://'])
-                                    ? $actor->photo_path
-                                    : asset('storage/' . $actor->photo_path))
-                                : asset('images/default-actor.png') }}"
-                        alt="{{ $actor->name }}" class="w-full h-auto object-cover">
+                        <img src="{{ $actor->photo_path
+                            ? (Str::startsWith($actor->photo_path, ['http://', 'https://'])
+                                ? $actor->photo_path
+                                : asset('storage/' . $actor->photo_path))
+                            : asset('images/default-actor.png') }}"
+                            alt="{{ $actor->name }}" class="w-full h-auto object-cover">
                     </div>
 
                     <h3 class="text-xl font-bold text-white mb-4">Informasi Pribadi</h3>
@@ -71,7 +66,6 @@
                     </div>
                 </div>
 
-                <!-- Main Content -->
                 <div class="flex-1">
                     <h1 class="text-5xl font-black text-white mb-6 tracking-tight">{{ $actor->name }}</h1>
 
@@ -144,10 +138,8 @@
         </div>
     </main>
 
-    <!-- Footer -->
     <footer id="main-footer"></footer>
 
-    <!-- Watchlist Alert Modal -->
     <div id="watchlist-alert-modal"></div>
 
 

@@ -1,4 +1,3 @@
-// Full storyline content
 const fullStorylineContent = `
 <p class="mb-3">Officers Judy Hopps and Nick Wilde are still fighting to be taken seriously as detectives - a struggle that gets worse when their off-the-books smuggling probe turns into a public disaster. With Chief Bogo threatening to split them up, the pair chase one last lead: a mysterious snake seen near the crime scene. That trail leads them to Gary DeSnake, a pit viper fugitive obsessed with exposing a secret behind the city's climate-controlling weather walls...</p>
 
@@ -9,7 +8,6 @@ const fullStorylineContent = `
 <p class="mb-3">New alliances are formed and old friendships are tested as the duo uncovers a plot that goes deeper than they ever imagined. With the help of some unexpected allies, including a tech-savvy shrew and a street-smart otter, Judy and Nick must use all their skills to prevent a catastrophe that could destroy Zootopia's fragile ecosystem and social harmony.</p>
 `;
 
-// DOM elements
 const playBtn = document.getElementById("playBtn");
 const modal = document.getElementById("modal");
 const closeModal = document.getElementById("closeModal");
@@ -25,7 +23,6 @@ const ratingStars = document.querySelectorAll(".rating-star");
 const ratingValue = document.getElementById("ratingValue");
 const selectedRating = document.getElementById("selectedRating");
 
-// Modal functionality
 if (playBtn) {
     playBtn.addEventListener("click", () => {
         modal.classList.remove("hidden");
@@ -42,7 +39,6 @@ if (closeModal) {
     });
 }
 
-// Close modal on outside click
 modal.addEventListener("click", (e) => {
     if (e.target === modal) {
         modal.classList.add("hidden");
@@ -51,7 +47,6 @@ modal.addEventListener("click", (e) => {
     }
 });
 
-// Watchlist toggle functionality
 if (watchlist) {
     watchlist.addEventListener("click", () => {
         const added = watchlist.dataset.added === "1";
@@ -70,7 +65,6 @@ if (watchlist) {
     });
 }
 
-// Read more functionality for storyline
 if (readMoreBtn && storylineContent) {
     let isExpanded = false;
 
@@ -91,7 +85,6 @@ if (readMoreBtn && storylineContent) {
     });
 }
 
-// Mark as watched button functionality
 const markWatchedBtn = document.querySelector(
     "button.bg-neutral-800.text-neutral-300"
 );
@@ -116,7 +109,6 @@ if (markWatchedBtn) {
     });
 }
 
-// Review Modal Functionality
 if (addReviewBtn) {
     addReviewBtn.addEventListener("click", () => {
         reviewModal.classList.remove("hidden");
@@ -143,7 +135,6 @@ if (cancelReview) {
     });
 }
 
-// Close review modal on outside click
 reviewModal.addEventListener("click", (e) => {
     if (e.target === reviewModal) {
         reviewModal.classList.add("hidden");
@@ -153,14 +144,12 @@ reviewModal.addEventListener("click", (e) => {
     }
 });
 
-// Rating stars functionality
 ratingStars.forEach((star) => {
     star.addEventListener("click", () => {
         const value = parseInt(star.getAttribute("data-value"));
         selectedRating.value = value;
         ratingValue.textContent = `${value}/10`;
 
-        // Update star display
         ratingStars.forEach((s) => {
             if (parseInt(s.getAttribute("data-value")) <= value) {
                 s.textContent = "★";
@@ -172,7 +161,6 @@ ratingStars.forEach((star) => {
         });
     });
 
-    // Add hover effect
     star.addEventListener("mouseover", () => {
         const value = parseInt(star.getAttribute("data-value"));
         ratingStars.forEach((s) => {
@@ -192,7 +180,6 @@ ratingStars.forEach((star) => {
     });
 });
 
-// Review form submission
 if (reviewForm) {
     reviewForm.addEventListener("submit", (e) => {
         e.preventDefault();
@@ -216,19 +203,15 @@ if (reviewForm) {
             return;
         }
 
-        // In a real app, you would send this data to a server
         console.log("Review submitted:", { rating, title, content });
 
-        // Show success message
         alert("Thank you for your review! It has been submitted successfully.");
 
-        // Close modal and reset form
         reviewModal.classList.add("hidden");
         reviewModal.classList.remove("flex");
         document.body.style.overflow = "";
         resetReviewForm();
 
-        // Update review count (mock)
         const reviewCountElement = document.querySelector(
             ".text-sm.text-neutral-400"
         );
@@ -248,7 +231,6 @@ if (reviewForm) {
     });
 }
 
-// Function to reset review form
 function resetReviewForm() {
     if (reviewForm) reviewForm.reset();
     selectedRating.value = "0";
@@ -260,9 +242,7 @@ function resetReviewForm() {
     });
 }
 
-// Initialize when DOM is loaded
 document.addEventListener("DOMContentLoaded", () => {
-    // Smooth scrolling for reviews
     const reviewsContainer = document.querySelector(
         ".reviews-scroll-container"
     );
@@ -270,11 +250,9 @@ document.addEventListener("DOMContentLoaded", () => {
         reviewsContainer.style.scrollBehavior = "smooth";
     }
 
-    // Set max height for cast section based on available space
     const castSection = document.querySelector(".cast-scroll");
     if (castSection) {
-        // Calculate available height based on viewport
         const viewportHeight = window.innerHeight;
-        castSection.style.maxHeight = "12rem"; // Fixed height for single page
+        castSection.style.maxHeight = "12rem";
     }
 });

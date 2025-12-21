@@ -23,7 +23,6 @@
 
     <main class="max-w-5xl mx-auto px-6 py-10">
 
-        <!-- BACK BUTTON (ANTI STUCK) -->
         <a href="{{ request('back', route('home')) }}"
             class="inline-flex items-center gap-2 px-4 py-2 mb-6 rounded-lg border border-neutral-800 text-sm text-neutral-300 hover:border-green-500 hover:text-green-400 hover:bg-neutral-900 transition">
             ← Kembali
@@ -39,11 +38,10 @@
             </div>
         @endif
 
-        <div class="grid md:grid-cols-[240px_1fr] gap-8">
+        <div class="grid grid-cols-1 md:grid-cols-[240px_1fr] gap-6 md:gap-8">
 
-            <!-- SIDEBAR -->
-            <div>
-                <div class="w-48 h-48 rounded-full overflow-hidden border border-neutral-800 mb-4">
+            <div class="flex flex-col items-center md:items-start">
+                <div class="w-32 h-32 sm:w-48 sm:h-48 rounded-full overflow-hidden border border-neutral-800 mb-4">
                     @if ($user->avatar_path)
                         <img src="{{ Storage::url($user->avatar_path) }}" class="w-full h-full object-cover">
                     @else
@@ -63,7 +61,24 @@
                     <p class="text-neutral-500 text-xs mt-1">{{ $user->email }}</p>
                 @endif
 
-                <!-- LOGOUT (OWNER ONLY) -->
+                @if(count($badges) > 0)
+                    <div class="mt-4">
+                        <p class="text-xs text-neutral-500 mb-2">Badges</p>
+                        <div class="flex flex-wrap gap-2">
+                            @foreach($badges as $badge)
+                                <div class="group relative">
+                                    <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-semibold bg-gradient-to-r {{ $badge['color'] }} {{ $badge['text'] }} cursor-default">
+                                        {{ $badge['icon'] }} {{ $badge['name'] }}
+                                    </span>
+                                    <div class="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 px-2 py-1 bg-neutral-800 text-neutral-200 text-xs rounded opacity-0 group-hover:opacity-100 transition whitespace-nowrap pointer-events-none z-10">
+                                        {{ $badge['description'] }}
+                                    </div>
+                                </div>
+                            @endforeach
+                        </div>
+                    </div>
+                @endif
+
                 @if ($isOwner)
                     <form method="POST" action="{{ route('logout') }}" class="mt-4">
                         @csrf
@@ -75,10 +90,8 @@
                 @endif
             </div>
 
-            <!-- CONTENT -->
             <div class="space-y-8">
 
-                <!-- EDIT PROFILE (OWNER ONLY) -->
                 @if ($isOwner)
                     <div class="bg-neutral-900 p-6 rounded-lg border border-neutral-800">
                         <h2 class="text-xl font-semibold mb-4">Edit Profile</h2>
@@ -111,7 +124,6 @@
                     </div>
                 @endif
 
-                <!-- FOLLOWED ACTORS -->
                 <div class="bg-neutral-900 p-6 rounded-lg border border-neutral-800">
                     <h2 class="text-xl font-semibold mb-4">
                         {{ $isOwner ? 'Aktor yang Anda Ikuti' : 'Aktor yang Diikuti' }}
@@ -143,7 +155,6 @@
                     </div>
                 </div>
 
-                <!-- USER REVIEWS -->
                 <div class="bg-neutral-900 p-6 rounded-lg border border-neutral-800">
                     <h2 class="text-xl font-semibold mb-4">
                         {{ $isOwner ? 'Review Saya' : 'Review' }}
@@ -172,7 +183,6 @@
                     @endforelse
                 </div>
 
-                <!-- ADMIN PANEL (OWNER + ADMIN) -->
                 @if ($isOwner && auth()->user()?->role === 'admin')
                     <div class="p-4 rounded-lg bg-neutral-900 border border-neutral-800">
                         <h3 class="text-sm font-semibold text-neutral-400 mb-3 uppercase tracking-wide">

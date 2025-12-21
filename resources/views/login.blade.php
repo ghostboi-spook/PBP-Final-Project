@@ -5,11 +5,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>IMIX - Masuk / Daftar</title>
-    <link rel="stylesheet" href="styles/global.css">
-    <link rel="stylesheet" href="styles/components.css">
-    <link rel="stylesheet" href="styles/layout.css">
-    <link rel="stylesheet" href="styles/login.css">
-    <script src="js/login.js"></script>
     <script src="https://cdn.tailwindcss.com"></script>
     @vite(['resources/css/global.css', 'resources/css/components.css', 'resources/css/layout.css', 'resources/css/login.css', 'resources/js/login.js'])
 </head>
@@ -27,7 +22,6 @@
             </div>
 
             <div class="login-form-container">
-                <!-- Login Form -->
                 <div class="login-fade-in">
                     <h2 class="login-form-title">Silakan Masuk</h2>
 

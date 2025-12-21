@@ -34,4 +34,9 @@ class HomeController extends Controller
             'topMovies'
         ));
     }
+
+    public function home()
+    {
+        return $this->index();
+    }
 }
