@@ -10,7 +10,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>IMIX - {{ $actor->name ?? 'Actor' }}</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    @vite(['resources/css/global.css', 'resources/css/components.css', 'resources/css/layout.css', 'resources/js/common.js'])
+    <link rel="stylesheet" href="{{ asset('css/global.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/components.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/layout.css') }}">
+    <script src="{{ asset('js/common.js') }}"></script>
 
     <style>
         body {

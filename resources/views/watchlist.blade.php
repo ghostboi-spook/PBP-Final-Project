@@ -16,7 +16,11 @@
         window.AUTH_USER = @json(auth()->user());
     </script>
 
-    @vite(['resources/css/global.css', 'resources/css/components.css', 'resources/css/layout.css', 'resources/css/watchlist.css', 'resources/js/common.js'])
+    <link rel="stylesheet" href="{{ asset('css/global.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/components.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/layout.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/watchlist.css') }}">
+    <script src="{{ asset('js/common.js') }}"></script>
 </head>
 
 <body class="bg-[#070707] text-neutral-200">

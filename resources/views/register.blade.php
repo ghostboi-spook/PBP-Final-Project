@@ -6,7 +6,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>IMIX - Daftar</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    @vite(['resources/css/global.css', 'resources/css/components.css', 'resources/css/layout.css', 'resources/css/login.css'])
+    <link rel="stylesheet" href="{{ asset('css/global.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/components.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/layout.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/login.css') }}">
 </head>
 
 <body class="login-background min-h-screen">

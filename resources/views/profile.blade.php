@@ -15,7 +15,10 @@
     </script>
 
     <script src="https://cdn.tailwindcss.com"></script>
-    @vite(['resources/css/global.css', 'resources/css/components.css', 'resources/css/layout.css'])
+    <link rel="stylesheet" href="{{ asset('css/global.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/components.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/layout.css') }}">
+    <script src="{{ asset('js/common.js') }}"></script>
 </head>
 
 <body class="bg-black text-white">

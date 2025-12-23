@@ -11,7 +11,12 @@
     <title>IMIX - Movie Platform</title>
 
     <script src="https://cdn.tailwindcss.com"></script>
-    @vite(['resources\css\global.css', 'resources/css/components.css', 'resources/css/layout.css', 'resources/css/carousel.css', 'resources/js/common.js', 'resources/js/carousel.js'])
+    <link rel="stylesheet" href="{{ asset('css/global.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/components.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/layout.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/carousel.css') }}">
+    <script src="{{ asset('js/common.js') }}"></script>
+    <script src="{{ asset('js/carousel.js') }}"></script>
     <script>
         window.AUTH_USER = @json(auth()->user());
         window.IMIX_DATA = {
